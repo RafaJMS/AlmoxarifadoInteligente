@@ -18,7 +18,7 @@ namespace AlmoxerifadoInteligente.API.Scraps
                 HtmlDocument document = web.Load(url);
 
                 Console.WriteLine(document.ToString());
-                HtmlNode firstProductPriceNode = document.DocumentNode.SelectSingleNode("//p[@class='sc-kpDqfm eCPtRw sc-bOhtcR dOwMgM']");
+                HtmlNode firstProductPriceNode = document.DocumentNode.SelectSingleNode("//p[@data-testid='sc-kpDqfm eCPtRw sc-bOhtcR dOwMgM']");
 
 
                 if (firstProductPriceNode != null)
@@ -36,7 +36,7 @@ namespace AlmoxerifadoInteligente.API.Scraps
 
                     LogRegister.RegistrarLog(DateTime.Now, "WebScraping - Magazine Luiza", "Preço não encontrado", idProduto);
 
-                    return null;
+                    return "0";
                 }
             }
             catch (Exception ex)
