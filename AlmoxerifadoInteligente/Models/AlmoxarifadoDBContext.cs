@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using AlmoxerifadoInteligente.Models;
 
 namespace AlmoxerifadoInteligente.Models
 {
@@ -23,7 +24,7 @@ namespace AlmoxerifadoInteligente.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=RAFAELMECENAS\\DBPRACTICE;Database=AlmoxarifadoDB;User Id=sa; Password=senha123;");
+                optionsBuilder.UseSqlServer("Server=PC03LAB2533\\SENAI;Database=AlmoxarifadoDB;User Id=sa;Password=senai.123;");
             }
         }
 
@@ -82,5 +83,7 @@ namespace AlmoxerifadoInteligente.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<AlmoxerifadoInteligente.Models.BenchmarkingItem>? BenchmarkingItem { get; set; }
     }
 }

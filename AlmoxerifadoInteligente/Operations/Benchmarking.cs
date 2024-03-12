@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AlmoxerifadoInteligente.API.Scraps;
+using AlmoxerifadoInteligente.Models;
+using RaspagemMagMer.Scraps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,31 +11,60 @@ namespace RaspagemMagMer.Operations
 {
     public class Benchmarking
     {
-        public static string CompareValue(string precoMag, string precoMer,string linkMer,string linkMag)
+        public static string[] CompareValue(string descricaoProduto, int idProduto)
         {
+            string[] data = new string[4];
+            MercadoLivreScraper mercadoLivreScraper = new();
+
+            string mercadoLivrePreco = mercadoLivreScraper.ObterPreco(descricaoProduto,idProduto);
+            string mercadoLivreNome = mercadoLivreScraper.ObterNome(descricaoProduto);
+            string mercadoLivreLink = mercadoLivreScraper.ObterLink(descricaoProduto);
+
+            MagazineScraper magazineLuizaScraper = new();
+
+            string magazineLuizaPreco = magazineLuizaScraper.ObterPreco(descricaoProduto,idProduto);
+            string magazineLuizaNome = magazineLuizaScraper.ObterNome(descricaoProduto);
+            string magazineLuizaLink = magazineLuizaScraper.ObterLink(descricaoProduto);
+
             char[] charRemove = { 'R', '$', ' ' };
 
-            decimal mercadoLivrePreco = Convert.ToDecimal(precoMer.Trim(charRemove));
-            decimal magazineLuizaPreco = Convert.ToDecimal(precoMag.Trim(charRemove));
+            decimal mercadoPreco = Convert.ToDecimal(mercadoLivrePreco.Trim(charRemove));
+            decimal magazinePreco = Convert.ToDecimal(magazineLuizaPreco.Trim(charRemove));
 
-            if (magazineLuizaPreco > mercadoLivrePreco)
+            if (magazinePreco > mercadoPreco)
 
             {
-                return $"O preço do produto está melhor no Mercado livre, pois está R$ {(magazineLuizaPreco - mercadoLivrePreco)} mais barato\n" +
-                       $"Link para produto Mer: {linkMer}";
+                decimal result = EconomiaOperation(magazinePreco, mercadoPreco);
+                data[0] = Convert.ToString(result);
+                data[1] = mercadoLivreNome;
+                data[2] = mercadoLivreLink;
+                data[3] = mercadoLivrePreco;
+                
+                return data;
 
 
             }
-            else if (magazineLuizaPreco < mercadoLivrePreco)
+            else if (magazinePreco < mercadoPreco)
             {
-                return $"O preço do produto está melhor na Magazine Luiza, pois está R$ {mercadoLivrePreco - magazineLuizaPreco} mais barato\n" +
-                       $"Link para produto Mag: {linkMag}";
+                decimal result = EconomiaOperation(mercadoPreco, magazinePreco);
+                data[0] = Convert.ToString(result);
+                data[1] = magazineLuizaNome;
+                data[2] = magazineLuizaLink;
+                data[3] = magazineLuizaPreco;
+
+                return data;
 
             }
             else
             {
-                return "Os preços são equivalentes";
+                return null;
             }
+        }
+    
+        public static decimal EconomiaOperation(decimal precoMaior, decimal precoMenor)
+        {
+            decimal result = precoMaior - precoMenor;
+            return result;
         }
     }
 }

@@ -47,32 +47,14 @@ namespace RaspagemMagMer.Operations
 
                                 if (!ProdutoJaRegistrado(produto.IdProduto,codUsu))
                                 {
-                                    LogRegister logRegister = new();
-                                    LogRegister.RegistrarLog( DateTime.Now, "ConsultaAPI - Verificar Produto", "Sucesso", produto.IdProduto);
+                                    Benchmarking.CompareValue(produto.Descricao, produto.IdProduto);
+                                    //LogRegister logRegister = new();
+                                   
+                                    //LogRegister.RegistrarLog( DateTime.Now, "ConsultaAPI - Verificar Produto", "Sucesso", produto.IdProduto);
+                                   
+                                    //LogRegister.RegistrarLog(DateTime.Now, "Benchmarking", "Sucesso", produto.IdProduto);
 
-                                    MercadoLivreScraper mercadoLivreScraper = new();
-
-                                    string mercadoLivrePreco = mercadoLivreScraper.ObterPreco(produto.Descricao, produto.IdProduto);
-
-                                    string mercadoLivreNome = mercadoLivreScraper.ObterNome(produto.Descricao);
-
-                                    string mercadoLivreLink = mercadoLivreScraper.ObterLink(produto.Descricao);
-
-                                    MagazineScraper magazineLuizaScraper = new();
-
-                                    string magazineLuizaPreco = magazineLuizaScraper.ObterPreco(produto.Descricao, produto.IdProduto);
-
-                                    string magazineLuizaNome = magazineLuizaScraper.ObterNome(produto.Descricao);
-
-                                    string magazineLuizaLink = magazineLuizaScraper.ObterLink(produto.Descricao);
-
-                                    string responseBench = Benchmarking.CompareValue(magazineLuizaPreco, mercadoLivrePreco, mercadoLivreLink, magazineLuizaLink);
-
-                                    Console.WriteLine(responseBench);
-
-                                    if (responseBench != null) LogRegister.RegistrarLog(DateTime.Now, "Benchmarking", "Sucesso", produto.IdProduto);
-
-                                    else LogRegister.RegistrarLog(DateTime.Now, "Benchmarking", "Erro", produto.IdProduto);
+                                    //LogRegister.RegistrarLog(DateTime.Now, "Benchmarking", "Erro", produto.IdProduto);
 
                                     //bool responseEmail = SendEmail.EnviarEmail(email, produto.Descricao, magazineLuizaNome, magazineLuizaPreco, mercadoLivreNome, mercadoLivrePreco, responseBench);
 
