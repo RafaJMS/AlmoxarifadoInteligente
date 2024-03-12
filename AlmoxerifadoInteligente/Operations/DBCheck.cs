@@ -52,8 +52,6 @@ namespace RaspagemMagMer.Operations
 
                                     MercadoLivreScraper mercadoLivreScraper = new();
 
-                                    mercadoLivreScraper.ObterData(produto.Descricao, produto.IdProduto);
-
                                     string mercadoLivrePreco = mercadoLivreScraper.ObterPreco(produto.Descricao, produto.IdProduto);
 
                                     string mercadoLivreNome = mercadoLivreScraper.ObterNome(produto.Descricao);
@@ -69,6 +67,8 @@ namespace RaspagemMagMer.Operations
                                     string magazineLuizaLink = magazineLuizaScraper.ObterLink(produto.Descricao);
 
                                     string responseBench = Benchmarking.CompareValue(magazineLuizaPreco, mercadoLivrePreco, mercadoLivreLink, magazineLuizaLink);
+
+                                    Console.WriteLine(responseBench);
 
                                     if (responseBench != null) LogRegister.RegistrarLog(DateTime.Now, "Benchmarking", "Sucesso", produto.IdProduto);
 

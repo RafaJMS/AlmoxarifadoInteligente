@@ -6,21 +6,9 @@ namespace RaspagemMagMer.Scraps
 {
     public class MercadoLivreScraper
     {
-        public string ObterData(string descricaoProduto, int idProduto)
-        {
-            string url = $"https://lista.mercadolivre.com.br/{descricaoProduto}";
-            
-            HtmlWeb web = new HtmlWeb();
 
-            HtmlDocument document = web.Load(url);
-
-            Console.WriteLine(document.ToString);
-
-            return "oi";
-        }
         public string ObterPreco(string descricaoProduto, int idProduto)
         {
-            string[] response = new string[3];
 
             string url = $"https://lista.mercadolivre.com.br/{descricaoProduto}";
 
@@ -40,7 +28,7 @@ namespace RaspagemMagMer.Scraps
                     string firstProductPrice = firstProductPriceNode.InnerText.Trim();
 
                     LogRegister.RegistrarLog(DateTime.Now, "WebScraping - Mercado Livre", "Sucesso", idProduto);
-                    Console.Write("Preço Mercado: "+firstProductPrice);
+                    Console.Write("Preço Mercado: "+firstProductPrice+"\n");
                     return firstProductPrice;
                 }
                 else
@@ -72,7 +60,7 @@ namespace RaspagemMagMer.Scraps
             if (firstProductPriceName != null)
             {
                 string firstProductName = firstProductPriceName.InnerText.Trim();
-                Console.WriteLine(firstProductName);
+                Console.Write("Nome Mercado: "+firstProductName + "\n");
                 return firstProductName;
             }
             else
