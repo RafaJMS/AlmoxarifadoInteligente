@@ -40,7 +40,7 @@ namespace RaspagemMagMer.Scraps
                     string firstProductPrice = firstProductPriceNode.InnerText.Trim();
 
                     LogRegister.RegistrarLog(DateTime.Now, "WebScraping - Mercado Livre", "Sucesso", idProduto);
-
+                    Console.Write("Preço Mercado: "+firstProductPrice);
                     return firstProductPrice;
                 }
                 else
@@ -72,6 +72,7 @@ namespace RaspagemMagMer.Scraps
             if (firstProductPriceName != null)
             {
                 string firstProductName = firstProductPriceName.InnerText.Trim();
+                Console.WriteLine(firstProductName);
                 return firstProductName;
             }
             else

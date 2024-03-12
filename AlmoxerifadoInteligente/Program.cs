@@ -8,19 +8,14 @@ class Program
 {
     public static void Main(string[] args)
     {
-        
-        string email = SendEmail.OpcaoEmail();
-        while (email == null)
-        {
-            Console.WriteLine("Email Inválido, tente novamente!");
-            email = SendEmail.OpcaoEmail();
+        // Iniciar o host da API antes de solicitar informações do usuário
+        var host = CreateHostBuilder(args).Build();
+        host.RunAsync();
 
-        }
-        string phoneNumber = SendMessage.OpcaoMsg();
+        DBCheck.VerificarNovoProduto();
 
-        DBCheck.VerificarNovoProduto(phoneNumber, email);
-
-        CreateHostBuilder(args).Build().Run();
+        // Agora você pode esperar o host da API terminar de executar
+        host.WaitForShutdown();
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>

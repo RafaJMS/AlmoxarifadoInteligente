@@ -17,7 +17,7 @@ namespace AlmoxerifadoInteligente.API.Scraps
 
                 HtmlDocument document = web.Load(url);
 
-
+                Console.WriteLine(document.ToString());
                 HtmlNode firstProductPriceNode = document.DocumentNode.SelectSingleNode("//p[@class='sc-kpDqfm eCPtRw sc-bOhtcR dOwMgM']");
 
 
@@ -27,7 +27,7 @@ namespace AlmoxerifadoInteligente.API.Scraps
                     string firstProductPrice = firstProductPriceNode.InnerText.Trim();
 
                     LogRegister.RegistrarLog(DateTime.Now, "WebScraping - Magazine Luiza", "Sucesso", idProduto);
-
+                    Console.WriteLine("Preco Magalu: "+firstProductPrice);
                     return firstProductPrice;
                 }
                 else
@@ -59,6 +59,7 @@ namespace AlmoxerifadoInteligente.API.Scraps
             if (firstProductPriceName != null)
             {
                 string firstProductName = firstProductPriceName.InnerText.Trim();
+                Console.WriteLine(firstProductName);
                 return firstProductName;
             }
             else

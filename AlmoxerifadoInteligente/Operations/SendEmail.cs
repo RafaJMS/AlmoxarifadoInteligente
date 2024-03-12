@@ -64,24 +64,22 @@ namespace RaspagemMagMer.Operations
 
         }
 
-        public static bool ValidarEmail(string email)
-        {
-            // Padrão de expressão regular para verificar o formato do e-mail
-            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-
-            // Verifica se o e-mail corresponde ao padrão
-            return Regex.IsMatch(email, pattern);
-        }
-
         public static string OpcaoEmail()
         {
+            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
             Console.Write("Insira o Email para recebimento do Resultado: ");
             string email = Console.ReadLine();
-            bool opt = SendEmail.ValidarEmail(email);
+            bool opt = (Regex.IsMatch(email, pattern));
             if (opt)
             {
-                Console.WriteLine("Email Informado: "+email);
+                Console.WriteLine("Email Informado: " + email);
                 return email;
+            }
+            while (opt == false)
+            {
+                Console.WriteLine("Email Inválido, tente novamente!");
+                OpcaoEmail();
+
             }
             return null;
         }

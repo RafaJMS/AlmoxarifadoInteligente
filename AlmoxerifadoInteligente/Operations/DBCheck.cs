@@ -15,12 +15,10 @@ namespace RaspagemMagMer.Operations
     {
         
         static List<Produto> produtosVerificados = new();
-        public static async void VerificarNovoProduto(string num,string emailAdress)
+        public static async void VerificarNovoProduto()
 
         {
             string codUsu = LogRegister.CodRobo;
-            string email = emailAdress;
-            string phoneNumber = num;
             string url = "https://localhost:7286/api/Produtos";
 
             try
@@ -30,11 +28,11 @@ namespace RaspagemMagMer.Operations
                 {
 
                     HttpResponseMessage response = await client.GetAsync(url);
-
+                    
                     if (response.IsSuccessStatusCode)
                     {
                         string responseData = await response.Content.ReadAsStringAsync();
-
+                        Console.WriteLine(responseData);
                         List<Produto> novosProdutos = ObterNovosProdutos(responseData);
 
                         foreach (Produto produto in novosProdutos)
@@ -76,16 +74,16 @@ namespace RaspagemMagMer.Operations
 
                                     else LogRegister.RegistrarLog(DateTime.Now, "Benchmarking", "Erro", produto.IdProduto);
 
-                                    bool responseEmail = SendEmail.EnviarEmail(email, produto.Descricao, magazineLuizaNome, magazineLuizaPreco, mercadoLivreNome, mercadoLivrePreco, responseBench);
+                                    //bool responseEmail = SendEmail.EnviarEmail(email, produto.Descricao, magazineLuizaNome, magazineLuizaPreco, mercadoLivreNome, mercadoLivrePreco, responseBench);
 
-                                    if (responseEmail == true) LogRegister.RegistrarLog(DateTime.Now, "SendEmail", "Sucesso", produto.IdProduto);
+                                    //if (responseEmail == true) LogRegister.RegistrarLog(DateTime.Now, "SendEmail", "Sucesso", produto.IdProduto);
 
-                                    else LogRegister.RegistrarLog(DateTime.Now, "SendEmail", "Erro", produto.IdProduto);
+                                    //else LogRegister.RegistrarLog(DateTime.Now, "SendEmail", "Erro", produto.IdProduto);
 
-                                    if (phoneNumber != null)
-                                    {
-                                        SendMessage.EnviarMsg(produto.IdProduto, phoneNumber, produto.Descricao, magazineLuizaNome, magazineLuizaPreco, mercadoLivreNome, mercadoLivrePreco, responseBench);
-                                    }
+                                    //if (phoneNumber != null)
+                                    //{
+                                    //    SendMessage.EnviarMsg(produto.IdProduto, phoneNumber, produto.Descricao, magazineLuizaNome, magazineLuizaPreco, mercadoLivreNome, mercadoLivrePreco, responseBench);
+                                    //}
 
                                 }
                             }
