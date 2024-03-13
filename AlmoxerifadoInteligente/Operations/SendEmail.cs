@@ -13,7 +13,7 @@ namespace RaspagemMagMer.Operations
 {
     public class SendEmail
     {
-        public static bool EnviarEmail(string destinatario,string nomeProduto,string nomeMag ,string precoMag, string nomeMerc, string precoMerc, string responseBench)
+        public static bool EnviarEmail(string destinatario)
         {
             
             string smtpserver = "smtp-mail.outlook.com";
