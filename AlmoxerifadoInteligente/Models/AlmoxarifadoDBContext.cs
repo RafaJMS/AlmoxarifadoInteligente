@@ -20,6 +20,8 @@ namespace AlmoxerifadoInteligente.Models
         public virtual DbSet<Log> Logs { get; set; } = null!;
         public virtual DbSet<Produto> Produtos { get; set; } = null!;
 
+        public virtual DbSet<BenchmarkingItem> BenchmarkingItems { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -30,6 +32,27 @@ namespace AlmoxerifadoInteligente.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<BenchmarkingItem>(entity =>
+            {
+                entity.ToTable("BenchmarkingItem");
+
+                entity.HasIndex(e => e.IdProdutoNavigationIdProduto, "IX_BenchmarkingItem_IdProdutoNavigationIdProduto");
+
+                entity.Property(e => e.Economia).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.PrecoLoja1).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.PrecoLoja2).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Email)
+                     .HasColumnType("nvarchar(max)")
+                     .IsRequired(false); // Permitindo valores nulos
+
+                entity.HasOne(d => d.IdProdutoNavigationIdProdutoNavigation)
+                    .WithMany(p => p.BenchmarkingItems)
+                    .HasForeignKey(d => d.IdProdutoNavigationIdProduto);
+            });
+
             modelBuilder.Entity<Log>(entity =>
             {
                 entity.HasKey(e => e.IdLog)

@@ -47,14 +47,8 @@ namespace RaspagemMagMer.Operations
 
                                 if (!ProdutoJaRegistrado(produto.IdProduto,codUsu))
                                 {
+                                    LogRegister.RegistrarLog(DateTime.Now, "ConsultaAPI - Verificar Produto", "Sucesso", produto.IdProduto);
                                     Benchmarking.CompareValue(produto.Descricao, produto.IdProduto);
-                                    //LogRegister logRegister = new();
-                                   
-                                    //LogRegister.RegistrarLog( DateTime.Now, "ConsultaAPI - Verificar Produto", "Sucesso", produto.IdProduto);
-                                   
-                                    //LogRegister.RegistrarLog(DateTime.Now, "Benchmarking", "Sucesso", produto.IdProduto);
-
-                                    //LogRegister.RegistrarLog(DateTime.Now, "Benchmarking", "Erro", produto.IdProduto);
 
                                     //bool responseEmail = SendEmail.EnviarEmail(email, produto.Descricao, magazineLuizaNome, magazineLuizaPreco, mercadoLivreNome, mercadoLivrePreco, responseBench);
 
@@ -62,7 +56,7 @@ namespace RaspagemMagMer.Operations
 
                                     //else LogRegister.RegistrarLog(DateTime.Now, "SendEmail", "Erro", produto.IdProduto);
 
-                                    //if (phoneNumber != null)
+                                    //if (phoneNumber != null),
                                     //{
                                     //    SendMessage.EnviarMsg(produto.IdProduto, phoneNumber, produto.Descricao, magazineLuizaNome, magazineLuizaPreco, mercadoLivreNome, mercadoLivrePreco, responseBench);
                                     //}
@@ -91,7 +85,7 @@ namespace RaspagemMagMer.Operations
             List<Produto> produtos = JsonConvert.DeserializeObject<List<Produto>>(responseData);
             return produtos;
         }
-
+        
         static bool ProdutoJaRegistrado(int idProduto,string codRobo)
         {
             using (var context = new AlmoxarifadoDBContext())

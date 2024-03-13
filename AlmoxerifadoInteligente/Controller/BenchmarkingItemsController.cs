@@ -28,7 +28,7 @@ namespace AlmoxerifadoInteligente.Controller
           {
               return NotFound();
           }
-            return await _context.BenchmarkingItem.Include(x=>x.IdProdutoNavigation).ToListAsync();
+            return await _context.BenchmarkingItems.Include(x=>x.IdProdutoNavigationIdProduto).ToListAsync();
         }
 
         // GET: api/BenchmarkingItems/5
@@ -39,7 +39,7 @@ namespace AlmoxerifadoInteligente.Controller
           {
               return NotFound();
           }
-            var benchmarkingItem = await _context.BenchmarkingItem.Include(x => x.IdProdutoNavigation).FirstOrDefaultAsync(x => x.Id ==id);
+            var benchmarkingItem = await _context.BenchmarkingItems.Include(x => x.IdProdutoNavigationIdProduto).FirstOrDefaultAsync(x => x.Id ==id);
 
             if (benchmarkingItem == null)
             {

@@ -102,26 +102,29 @@ namespace AlmoxerifadoInteligente.API.Scraps
             }
         }
 
-        // Outros métodos (ObterNome, ObterLink) permaneceriam como estão
     
     public string ObterNome(string descricaoProduto)
     {
-        string url = $"https://www.magazineluiza.com.br/busca/{descricaoProduto}";
-        HtmlWeb web = new HtmlWeb();
-        HtmlDocument document = web.Load(url);
-        HtmlNode firstProductPriceName = document.DocumentNode.SelectSingleNode("//h2[@class='sc-fvwjDU fbccdO']");
+           
 
-        if (firstProductPriceName != null)
-        {
-            string firstProductName = firstProductPriceName.InnerText.Trim();
-            Console.WriteLine("Nome Magalu: " + firstProductName + "\n");
-            return firstProductName;
+            using (IWebDriver driver = InitializeDriver())
+            {
+                string url = $"https://www.magazineluiza.com.br/busca/{descricaoProduto}";
+                driver.Navigate().GoToUrl(url);
+
+                IWebElement nameElement = driver.FindElement(By.CssSelector("[data-testid='product-title']"));
+
+                if (nameElement != null)
+                {   
+                    Console.WriteLine("Nome Magalu: " + nameElement.Text + "\n");
+                    return nameElement.Text;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
-        else
-        {
-            return null;
-        }
-    }
 
     public string ObterLink(string descricaoProduto)
     {
