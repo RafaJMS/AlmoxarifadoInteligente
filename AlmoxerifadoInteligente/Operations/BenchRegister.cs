@@ -10,7 +10,7 @@ namespace RaspagemMagMer.Operations
     public class BenchRegister
     {
 
-        public static void RegistrarBench(string nomeMer, string nomeMag ,decimal precoMer, decimal precoMag, decimal economia, int idProd)
+        public static void RegistrarBench(string nomeMer, string nomeMag ,string linkMer, string linkMag,decimal precoMer, decimal precoMag, decimal economia, int idProd)
         {
             using var context = new AlmoxarifadoDBContext();
             var benchmarkitem = new BenchmarkingItem
@@ -19,6 +19,8 @@ namespace RaspagemMagMer.Operations
                 NomeLoja2 = nomeMag,
                 PrecoLoja1 = precoMer,
                 PrecoLoja2 = precoMag,
+                LinkLoja1 = linkMer,
+                LinkLoja2 = linkMag,
                 Email = "aleatorio",
                 Economia = economia,
                 IdProduto = idProd

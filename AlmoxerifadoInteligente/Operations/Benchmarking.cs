@@ -17,6 +17,7 @@ namespace RaspagemMagMer.Operations
             
             try
             {
+
                 MercadoLivreScraper mercadoLivreScraper = new();
 
                 string mercadoLivrePreco = mercadoLivreScraper.ObterPreco(descricaoProduto, idProduto);
@@ -44,7 +45,7 @@ namespace RaspagemMagMer.Operations
                     data[2] = mercadoLivreLink;
                     data[3] = mercadoLivrePreco;
 
-                    BenchRegister.RegistrarBench(mercadoLivreNome, magazineLuizaNome, mercadoPreco, magazinePreco, result, idProduto);
+                    BenchRegister.RegistrarBench(mercadoLivreNome, magazineLuizaNome, mercadoLivreLink,magazineLuizaLink,mercadoPreco, magazinePreco, result, idProduto);
 
                     LogRegister.RegistrarLog(DateTime.Now, "Benchmarking", "Sucesso", idProduto);
 
@@ -59,8 +60,8 @@ namespace RaspagemMagMer.Operations
                     data[1] = magazineLuizaNome;
                     data[2] = magazineLuizaLink;
                     data[3] = magazineLuizaPreco;
-                    
-                    BenchRegister.RegistrarBench(mercadoLivreNome, magazineLuizaNome, mercadoPreco, magazinePreco, result, idProduto);
+
+                    BenchRegister.RegistrarBench(mercadoLivreNome, magazineLuizaNome, mercadoLivreLink, magazineLuizaLink, mercadoPreco, magazinePreco, result, idProduto);
 
                     LogRegister.RegistrarLog(DateTime.Now, "Benchmarking", "Sucesso", idProduto);
 

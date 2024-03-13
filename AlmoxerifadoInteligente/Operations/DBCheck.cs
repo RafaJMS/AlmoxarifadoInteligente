@@ -50,16 +50,7 @@ namespace RaspagemMagMer.Operations
                                     LogRegister.RegistrarLog(DateTime.Now, "ConsultaAPI - Verificar Produto", "Sucesso", produto.IdProduto);
                                     Benchmarking.CompareValue(produto.Descricao, produto.IdProduto);
 
-                                    //bool responseEmail = SendEmail.EnviarEmail(email, produto.Descricao, magazineLuizaNome, magazineLuizaPreco, mercadoLivreNome, mercadoLivrePreco, responseBench);
-
-                                    //if (responseEmail == true) LogRegister.RegistrarLog(DateTime.Now, "SendEmail", "Sucesso", produto.IdProduto);
-
-                                    //else LogRegister.RegistrarLog(DateTime.Now, "SendEmail", "Erro", produto.IdProduto);
-
-                                    //if (phoneNumber != null),
-                                    //{
-                                    //    SendMessage.EnviarMsg(produto.IdProduto, phoneNumber, produto.Descricao, magazineLuizaNome, magazineLuizaPreco, mercadoLivreNome, mercadoLivrePreco, responseBench);
-                                    //}
+                                    
 
                                 }
                             }

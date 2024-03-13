@@ -10,8 +10,6 @@ namespace RaspagemMagMer.Operations
     {
         public static async void EnviarMsg(int produtoid,string phoneNumber,string nomeProduto, string nomeMag, string precoMag, string nomeMerc, string precoMerc, string responseBench)
         {
-              
-
 
                 try
                 {

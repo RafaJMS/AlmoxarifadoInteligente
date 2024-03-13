@@ -26,7 +26,7 @@ namespace AlmoxerifadoInteligente.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=RAFAELMECENAS\\DBPRACTICE;Database=AlmoxarifadoDB;User Id=sa;Password=senha123;");
+                optionsBuilder.UseSqlServer("Server=PC03LAB2533\\SENAI;Database=AlmoxarifadoDB;User Id=sa;Password=senai.123;");
             }
         }
 
@@ -46,7 +46,7 @@ namespace AlmoxerifadoInteligente.Models
 
                 entity.Property(e => e.Email)
                      .HasColumnType("nvarchar(max)")
-                     .IsRequired(false); // Permitindo valores nulos
+                     .IsRequired(false); 
 
                 entity.HasOne(d => d.IdProdutoNavigationIdProdutoNavigation)
                     .WithMany(p => p.BenchmarkingItems)

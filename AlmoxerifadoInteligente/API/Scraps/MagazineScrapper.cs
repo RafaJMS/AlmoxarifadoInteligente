@@ -102,8 +102,7 @@ namespace AlmoxerifadoInteligente.API.Scraps
             }
         }
 
-    
-    public string ObterNome(string descricaoProduto)
+        public string ObterNome(string descricaoProduto)
     {
            
 
@@ -126,9 +125,9 @@ namespace AlmoxerifadoInteligente.API.Scraps
             }
         }
 
-    public string ObterLink(string descricaoProduto)
+        public string ObterLink(string descricaoProduto)
     {
-        string url = $"https://lista.mercadolivre.com.br/{descricaoProduto.Replace(' ', '+')}";
+        string url = $"https://www.magazineluiza.com.br/busca/{descricaoProduto.Replace(' ', '+')}";
         return url;
     }
 }

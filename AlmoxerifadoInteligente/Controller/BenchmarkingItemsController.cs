@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AlmoxerifadoInteligente.Models;
 
-namespace AlmoxerifadoInteligente.Controller
+namespace AlmoxerifadoInteligente.API
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -24,22 +24,22 @@ namespace AlmoxerifadoInteligente.Controller
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BenchmarkingItem>>> GetBenchmarkingItem()
         {
-          if (_context.BenchmarkingItem == null)
-          {
-              return NotFound();
-          }
-            return await _context.BenchmarkingItems.Include(x=>x.IdProdutoNavigationIdProduto).ToListAsync();
+            if (_context.BenchmarkingItem == null)
+            {
+                return NotFound();
+            }
+            return await _context.BenchmarkingItems.Include(x => x.IdProdutoNavigationIdProdutoNavigation).ToListAsync();
         }
 
         // GET: api/BenchmarkingItems/5
         [HttpGet("{id}")]
         public async Task<ActionResult<BenchmarkingItem>> GetBenchmarkingItem(int id)
         {
-          if (_context.BenchmarkingItem == null)
-          {
-              return NotFound();
-          }
-            var benchmarkingItem = await _context.BenchmarkingItems.Include(x => x.IdProdutoNavigationIdProduto).FirstOrDefaultAsync(x => x.Id ==id);
+            if (_context.BenchmarkingItem == null)
+            {
+                return NotFound();
+            }
+            var benchmarkingItem = await _context.BenchmarkingItems.Include(x => x.IdProdutoNavigationIdProdutoNavigation).FirstOrDefaultAsync(x => x.Id == id);
 
             if (benchmarkingItem == null)
             {
@@ -85,10 +85,10 @@ namespace AlmoxerifadoInteligente.Controller
         [HttpPost]
         public async Task<ActionResult<BenchmarkingItem>> PostBenchmarkingItem(BenchmarkingItem benchmarkingItem)
         {
-          if (_context.BenchmarkingItem == null)
-          {
-              return Problem("Entity set 'AlmoxarifadoDBContext.BenchmarkingItem'  is null.");
-          }
+            if (_context.BenchmarkingItem == null)
+            {
+                return Problem("Entity set 'AlmoxarifadoDBContext.BenchmarkingItem'  is null.");
+            }
             _context.BenchmarkingItem.Add(benchmarkingItem);
             await _context.SaveChangesAsync();
 
