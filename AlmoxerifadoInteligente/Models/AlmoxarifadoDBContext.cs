@@ -26,7 +26,7 @@ namespace AlmoxerifadoInteligente.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=PC03LAB2533\\SENAI;Database=AlmoxarifadoDB;User Id=sa;Password=senai.123;");
+                optionsBuilder.UseSqlServer("Server=RAFAELMECENAS\\DBPRACTICE;Database=AlmoxarifadoDB;User Id=sa;Password=senha123;");
             }
         }
 
@@ -35,8 +35,6 @@ namespace AlmoxerifadoInteligente.Models
             modelBuilder.Entity<BenchmarkingItem>(entity =>
             {
                 entity.ToTable("BenchmarkingItem");
-
-                entity.HasIndex(e => e.IdProdutoNavigationIdProduto, "IX_BenchmarkingItem_IdProdutoNavigationIdProduto");
 
                 entity.Property(e => e.Economia).HasColumnType("decimal(18, 2)");
 
@@ -48,9 +46,7 @@ namespace AlmoxerifadoInteligente.Models
                      .HasColumnType("nvarchar(max)")
                      .IsRequired(false); 
 
-                entity.HasOne(d => d.IdProdutoNavigationIdProdutoNavigation)
-                    .WithMany(p => p.BenchmarkingItems)
-                    .HasForeignKey(d => d.IdProdutoNavigationIdProduto);
+               
             });
 
             modelBuilder.Entity<Log>(entity =>
